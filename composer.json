@@ -1,0 +1,29 @@
+{
+    "name": "emmanuelballery/eb-emailbundle",
+    "description": "EBEmailBundle",
+    "homepage": "https://github.com/emmanuelballery/EBEmailBundle.git",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/emmanuelballery/EBEmailBundle.git"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Emmanuel BALLERY",
+            "email": "emmanuel.ballery@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "doctrine/doctrine-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "EB\\EmailBundle": ""
+        }
+    },
+    "target-dir": "EB/EmailBundle"
+}
