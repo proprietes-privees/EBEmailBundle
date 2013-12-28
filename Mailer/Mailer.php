@@ -4,7 +4,6 @@ namespace EB\EmailBundle\Mailer;
 
 use EB\UserBundle\Entity\UserInterface;
 use Symfony\Component\Templating\EngineInterface;
-use EB\UserBundle\Entity\UserSuperclass;
 
 /**
  * Class Mailer
