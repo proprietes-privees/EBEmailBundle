@@ -34,14 +34,14 @@ class Mailer
     private $emails;
 
     /**
-     * @param \Swift_Mailer   $mailer     Mailer
-     * @param EngineInterface $templating Templating
-     * @param array           $senders    Senders
-     * @param array           $emails     Emails
+     * @param \Swift_Mailer     $mailer     Mailer
+     * @param \Twig_Environment $templating Templating
+     * @param array             $senders    Senders
+     * @param array             $emails     Emails
      *
      * @throws \Exception
      */
-    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, array $senders, array $emails)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, array $senders, array $emails)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;

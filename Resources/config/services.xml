@@ -6,10 +6,20 @@
         <parameter key="eb_email.mailer.mailer.class">EB\EmailBundle\Mailer\Mailer</parameter>
     </parameters>
     <services>
+        <service id="eb_email.twig.loader.string" class="Twig_Loader_String"/>
+        <service id="eb_email.twig.loader.chain" class="Twig_Loader_Chain">
+            <argument type="collection">
+                <argument id="twig.loader.filesystem" type="service"/>
+                <argument id="eb_email.twig.loader.string" type="service"/>
+            </argument>
+        </service>
+        <service id="eb_email.twig.environment" class="Twig_Environment">
+            <argument id="eb_email.twig.loader.chain" type="service"/>
+        </service>
         <service id="eb_email" alias="eb_email.mailer.mailer"></service>
         <service id="eb_email.mailer.mailer" class="%eb_email.mailer.mailer.class%">
             <argument id="mailer" type="service"/>
-            <argument id="templating" type="service"/>
+            <argument id="eb_email.twig.environment" type="service"/>
             <argument>%eb_email.mailer.mailer.senders%</argument>
             <argument>%eb_email.mailer.mailer.emails%</argument>
         </service>
