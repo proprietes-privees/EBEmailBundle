@@ -70,7 +70,7 @@ class Mailer
         $template = $this->emails[$templateName];
 
         // Users
-        $cleanUsers = $templateData['receivers'];
+        $cleanUsers = array();
         $users = false === is_array($users) ? array($users) : $users;
         foreach ($users as $name => $user) {
             if (is_object($user) && $user instanceof UserInterface) {
