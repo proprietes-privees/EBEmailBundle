@@ -17,9 +17,9 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4",
         "symfony/swiftmailer-bundle": "*",
-        "emmanuelballery/eb-userbundle": "dev-master"
+        "emmanuelballery/eb-doctrinebundle": "dev-master",
     },
     "autoload": {
         "psr-0": {

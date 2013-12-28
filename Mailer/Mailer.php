@@ -2,7 +2,7 @@
 
 namespace EB\EmailBundle\Mailer;
 
-use EB\UserBundle\Entity\UserInterface;
+use EB\DoctrineBundle\Entity\UserInterface;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -60,7 +60,7 @@ class Mailer
      * @return int
      * @throws \Exception
      */
-    public function send($templateName, $users = array(), $templateData = array(), $images = array(), $attachments = array())
+    public function send($templateName, $users = [], $templateData = [], $images = [], $attachments = [])
     {
         // Validate template
         if (false === isset($this->emails[$templateName])) {
@@ -69,8 +69,8 @@ class Mailer
         $template = $this->emails[$templateName];
 
         // Users
-        $cleanUsers = array();
-        $users = false === is_array($users) ? array($users) : $users;
+        $cleanUsers = [];
+        $users = false === is_array($users) ? [$users] : $users;
         foreach ($users as $name => $user) {
             if (is_object($user) && $user instanceof UserInterface) {
                 $cleanUsers[] = $user->getUsername();
@@ -88,7 +88,7 @@ class Mailer
         $email->setContentType('text/html');
         $email->setFrom($this->senders);
         $email->setSubject($subject = $this->templating->render($template['subject'], $templateData));
-        array_map(array($email, 'addTo'), $cleanUsers);
+        array_map([$email, 'addTo'], $cleanUsers);
         $templateData['subject'] = $subject;
 
         // Attach files

@@ -16,7 +16,7 @@
         <service id="eb_email.twig.environment" class="Twig_Environment">
             <argument id="eb_email.twig.loader.chain" type="service"/>
         </service>
-        <service id="eb_email" alias="eb_email.mailer.mailer"></service>
+        <service id="eb_email" alias="eb_email.mailer.mailer"/>
         <service id="eb_email.mailer.mailer" class="%eb_email.mailer.mailer.class%">
             <argument id="mailer" type="service"/>
             <argument id="eb_email.twig.environment" type="service"/>

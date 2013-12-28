@@ -22,14 +22,14 @@ class EBEmailExtension extends Extension
         $conf = $this->processConfiguration(new Configuration(), $configs);
 
         // Prepare senders
-        $senders = array();
+        $senders = [];
         foreach ($conf['senders'] as $sender) {
             $senders[$sender['email']] = $sender['name'];
         }
         $container->setParameter('eb_email.mailer.mailer.senders', $senders);
 
         // Merge templates with global vars
-        $emails = array();
+        $emails = [];
         foreach ($conf['emails'] as $name => $template) {
             // @todo
             // The template must exist
@@ -38,25 +38,25 @@ class EBEmailExtension extends Extension
             // }
 
             // Receivers
-            $receivers = array();
+            $receivers = [];
             foreach ($conf['receivers'] as $receiver) {
                 $receivers[$receiver['email']] = $receiver['name'];
             }
 
             // Register
-            $emails[$name] = array(
+            $emails[$name] = [
                 'template' => $template['template'],
                 'subject' => $template['subject'],
                 'images' => array_merge(
-                    isset($template['images']) ? $template['images'] : array(),
-                    isset($conf['images']) ? $conf['images'] : array()
+                    isset($template['images']) ? $template['images'] : [],
+                    isset($conf['images']) ? $conf['images'] : []
                 ),
                 'attachments' => array_merge(
-                    isset($template['attachments']) ? $template['attachments'] : array(),
-                    isset($conf['attachments']) ? $conf['attachments'] : array()
+                    isset($template['attachments']) ? $template['attachments'] : [],
+                    isset($conf['attachments']) ? $conf['attachments'] : []
                 ),
                 'receivers' => $receivers,
-            );
+            ];
 
             // Ensure images has string keys
             $keys = array_keys($emails[$name]['images']);
