@@ -49,13 +49,52 @@ class Mailer
     }
 
     /**
+     * Render an email - Can be used to display the result
+     *
+     * @param string $templateName Template name
+     * @param array  $templateData Template data
+     * @param array  $images       Images
+     * @param array  $attachments  Attachments
+     *
+     * @return int
+     * @throws \Exception
+     */
+    public function render($templateName, $templateData = [], $images = [], $attachments = [])
+    {
+        // Validate template
+        if (false === isset($this->emails[$templateName])) {
+            throw new \Exception('This email is not configured in eb_email.emails');
+        }
+
+        // Merge template data
+        $template = $this->emails[$templateName];
+        if (isset($template['globals'])) {
+            $templateData = array_merge($templateData, $template['globals']);
+        }
+        $templateData['subject'] = $this->templating->render($template['subject'], $templateData);
+
+        // Attach files
+        $images = array_merge($images, $template['images']);
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        foreach ($images as $key => $image) {
+            $templateData[$key] = 'data:' . finfo_file($finfo, $image) . ';base64,' . base64_encode(file_get_contents($image));
+        }
+        $attachments = array_merge($attachments, $template['attachments']);
+        foreach ($attachments as $attachment) {
+            $templateData[$key] = sprintf('javascript:alert("will download %s")', htmlentities($attachment));
+        }
+
+        return $this->templating->render($template['template'], $templateData);
+    }
+
+    /**
      * Send email
      *
-     * @param string                               $templateName
-     * @param string|UserInterface|UserInterface[] $users
-     * @param array                                $templateData
-     * @param array                                $images
-     * @param array                                $attachments
+     * @param string                               $templateName Template name
+     * @param string|UserInterface|UserInterface[] $users        Users : emails, name=>email, UserInterface
+     * @param array                                $templateData Template data
+     * @param array                                $images       Images
+     * @param array                                $attachments  Attachments
      *
      * @return int
      * @throws \Exception
@@ -67,6 +106,9 @@ class Mailer
             throw new \Exception('This email is not configured in eb_email.emails');
         }
         $template = $this->emails[$templateName];
+        if (isset($template['globals'])) {
+            $templateData = array_merge($templateData, $template['globals']);
+        }
 
         // Users
         $cleanUsers = [];

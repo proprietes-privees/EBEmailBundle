@@ -25,7 +25,8 @@ class Configuration implements ConfigurationInterface
         $senders->scalarNode('name')->isRequired()->cannotBeEmpty()->info('Sender name')->example('John Doe');
         $senders->scalarNode('email')->isRequired()->cannotBeEmpty()->info('Sender email')->example('john.doe@gmail.com');
 
-        // Images to add for all emails
+        // Resources to add for all emails
+        $children->arrayNode('globals')->useAttributeAsKey('name')->info('Global to add in each template')->example('A parameter')->prototype('scalar');
         $children->arrayNode('images')->useAttributeAsKey('name')->info('Images to attach inline')->example('/path/to/file')->prototype('scalar');
         $children->arrayNode('attachments')->info('Files to attach')->example('/path/to/file')->prototype('scalar');
 
@@ -33,6 +34,7 @@ class Configuration implements ConfigurationInterface
         $template = $children->arrayNode('emails')->useAttributeAsKey('name')->prototype('array')->children();
         $template->scalarNode('template')->isRequired()->cannotBeEmpty()->info('Template')->example('AcmeDefautBundle::email.html.twig');
         $template->scalarNode('subject')->isRequired()->cannotBeEmpty()->info('Email subject (twig template)')->example('Welcome {{user.username}} to {{app_name}} !');
+        $template->arrayNode('globals')->useAttributeAsKey('name')->info('Global to add in this template')->example('A parameter')->prototype('scalar');
         $template->arrayNode('images')->useAttributeAsKey('name')->info('Images to attach inline')->example('/path/to/file')->prototype('scalar');
         $template->arrayNode('attachments')->info('Files to attach')->example('/path/to/file')->prototype('scalar');
 

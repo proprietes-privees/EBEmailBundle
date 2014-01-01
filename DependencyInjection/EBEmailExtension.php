@@ -47,6 +47,10 @@ class EBEmailExtension extends Extension
             $emails[$name] = [
                 'template' => $template['template'],
                 'subject' => $template['subject'],
+                'globals' => array_merge(
+                    isset($template['globals']) ? $template['globals'] : [],
+                    isset($conf['globals']) ? $conf['globals'] : []
+                ),
                 'images' => array_merge(
                     isset($template['images']) ? $template['images'] : [],
                     isset($conf['images']) ? $conf['images'] : []
