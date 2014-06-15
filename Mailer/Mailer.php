@@ -80,7 +80,7 @@ class Mailer
             $templateData[$key] = 'data:' . finfo_file($finfo, $image) . ';base64,' . base64_encode(file_get_contents($image));
         }
         $attachments = array_merge($attachments, $template['attachments']);
-        foreach ($attachments as $attachment) {
+        foreach ($attachments as $key => $attachment) {
             $templateData[$key] = sprintf('javascript:alert("will download %s")', htmlentities($attachment));
         }
 
