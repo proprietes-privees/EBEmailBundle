@@ -22,9 +22,8 @@
         "emmanuelballery/eb-doctrinebundle": "dev-master"
     },
     "autoload": {
-        "psr-0": {
-            "EB\\EmailBundle": ""
+        "psr-4": {
+            "EB\\EmailBundle\\": ""
         }
-    },
-    "target-dir": "EB/EmailBundle"
+    }
 }
