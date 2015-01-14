@@ -18,8 +18,8 @@
     ],
     "require": {
         "php": ">=5.4",
-        "symfony/swiftmailer-bundle": "*",
-        "emmanuelballery/eb-doctrinebundle": "0.0.*"
+        "symfony/swiftmailer-bundle": "~2.3",
+        "emmanuelballery/eb-doctrinebundle": "~0.0"
     },
     "autoload": {
         "psr-4": {
