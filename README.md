@@ -1,4 +1,1 @@
-EBEmailBundle
-=============
-
-EBEmailBundle
+# EBEmailBundle

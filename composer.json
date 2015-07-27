@@ -1,29 +1,14 @@
 {
-    "name": "emmanuelballery/eb-emailbundle",
-    "description": "EBEmailBundle",
-    "homepage": "https://github.com/emmanuelballery/EBEmailBundle.git",
-    "type": "symfony-bundle",
-    "license": "MIT",
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/emmanuelballery/EBEmailBundle.git"
-        }
-    ],
-    "authors": [
-        {
-            "name": "Emmanuel BALLERY",
-            "email": "emmanuel.ballery@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.4",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "emmanuelballery/eb-doctrinebundle": "~0.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "EB\\EmailBundle\\": ""
-        }
+  "name": "emmanuelballery/eb-emailbundle",
+  "description": "Dead simple mailer",
+  "type": "symfony-bundle",
+  "require": {
+    "php": ">=5.4",
+    "symfony/swiftmailer-bundle": "~2.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "EB\\EmailBundle\\": ""
     }
+  }
 }

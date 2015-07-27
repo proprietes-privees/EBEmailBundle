@@ -2,7 +2,6 @@
 
 namespace EB\EmailBundle\Mailer;
 
-use EB\DoctrineBundle\Entity\UserInterface;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -90,11 +89,11 @@ class Mailer
     /**
      * Send email
      *
-     * @param string                               $templateName Template name
-     * @param string|UserInterface|UserInterface[] $users        Users : emails, name=>email, UserInterface
-     * @param array                                $templateData Template data
-     * @param array                                $images       Images
-     * @param array                                $attachments  Attachments
+     * @param string            $templateName Template name
+     * @param string[]|object[] $users        List of emails, or name,email
+     * @param array             $templateData Template data
+     * @param array             $images       Images
+     * @param array             $attachments  Attachments
      *
      * @return int
      * @throws \Exception
@@ -114,7 +113,7 @@ class Mailer
         $cleanUsers = [];
         $users = false === is_array($users) ? [$users] : $users;
         foreach ($users as $name => $user) {
-            if (is_object($user) && $user instanceof UserInterface) {
+            if (is_object($user) && method_exists($user, 'getUsername')) {
                 $cleanUsers[] = $user->getUsername();
             } elseif (is_string($name) && is_string($user)) {
                 $cleanUsers[$name] = $user;
