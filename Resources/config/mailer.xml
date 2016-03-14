@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="eb_email" alias="eb_email.mailer.mailer"/>
+        <service id="eb_email.mailer.mailer" class="EB\EmailBundle\Mailer\Mailer">
+            <argument type="service" id="mailer"/>
+            <argument type="service" id="templating"/>
+            <argument>%eb_email.mailer.mailer.senders%</argument>
+            <argument>%eb_email.mailer.mailer.emails%</argument>
+        </service>
+        <service id="eb_email.twig.extension.loader" class="Twig_Extension_StringLoader">
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>
