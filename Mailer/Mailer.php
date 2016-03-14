@@ -50,7 +50,7 @@ class Mailer
     /**
      * Render an email - Can be used to display the result
      *
-     * @param string $templateName Template name
+     * @param string $templateId   Template ID
      * @param array  $templateData Template data
      * @param array  $images       Images
      * @param array  $attachments  Attachments
@@ -58,15 +58,15 @@ class Mailer
      * @return int
      * @throws \Exception
      */
-    public function render($templateName, $templateData = [], $images = [], $attachments = [])
+    public function render($templateId, $templateData = [], $images = [], $attachments = [])
     {
         // Validate template
-        if (false === isset($this->emails[$templateName])) {
+        if (false === isset($this->emails[$templateId])) {
             throw new \Exception('This email is not configured in eb_email.emails');
         }
 
         // Merge template data
-        $template = $this->emails[$templateName];
+        $template = $this->emails[$templateId];
         if (isset($template['globals'])) {
             $templateData = array_merge($templateData, $template['globals']);
         }
@@ -91,7 +91,7 @@ class Mailer
     /**
      * Send email
      *
-     * @param string                          $templateName Template name
+     * @param string                          $templateId   Template ID
      * @param string|string[]|object|object[] $users        List of emails, or name,email
      * @param array                           $templateData Template data
      * @param array                           $images       Images
@@ -100,20 +100,20 @@ class Mailer
      * @return int
      * @throws \Exception
      */
-    public function send($templateName, $users = [], $templateData = [], $images = [], $attachments = [])
+    public function send($templateId, $users = [], $templateData = [], $images = [], $attachments = [])
     {
         // Validate template
-        if (!isset($this->emails[$templateName])) {
+        if (!isset($this->emails[$templateId])) {
             throw new \Exception('This email is not configured in eb_email.emails');
         }
 
-        $template = $this->emails[$templateName];
+        $template = $this->emails[$templateId];
         if (isset($template['globals'])) {
             $templateData = array_merge($templateData, $template['globals']);
         }
 
         // Users
-        $cleanUsers = $this->getRecipients($templateName, $users);
+        $cleanUsers = $this->getRecipients($templateId, $users);
 
         // Create the swift mailer instance
         $email = \Swift_Message::newInstance();
