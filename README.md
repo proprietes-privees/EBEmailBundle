@@ -19,7 +19,7 @@ We have to send a ``contact`` email with a specific subject and body.
         # ...
         emails:
             contact:
-                text_template: 'AppBundle:Email:_contact_text.html.twig'
+                text_template: 'AppBundle:Email:_contact.txt.twig'
                 subject: 'New contact !'
 
 If you want to send an email with an alternative ``text/plain``
@@ -29,8 +29,8 @@ and ``text/html`` just use the ``html_template`` key :
         # ...
         emails:
             contact:
-                text_template: 'AppBundle:Email:_contact_text.html.twig'
-                html_template: 'AppBundle:Email:_contact_html.html.twig'
+                text_template: 'AppBundle:Email:_contact.txt.twig'
+                html_template: 'AppBundle:Email:_contact.html.twig'
                 subject: 'New contact !'
 
 ## Send your email
