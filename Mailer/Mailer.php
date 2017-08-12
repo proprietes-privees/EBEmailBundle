@@ -22,20 +22,20 @@ class Mailer
     private $templating;
 
     /**
-     * @var array
+     * @var string[]
      */
     private $senders;
 
     /**
-     * @var array
+     * @var string[]
      */
     private $emails;
 
     /**
      * @param \Swift_Mailer   $mailer     Swift Mailer
      * @param EngineInterface $templating Rendering Engine
-     * @param array           $senders    Senders
-     * @param array           $emails     Emails
+     * @param string[]        $senders    Senders
+     * @param string[]        $emails     Emails
      */
     public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, array $senders, array $emails)
     {
@@ -48,10 +48,10 @@ class Mailer
     /**
      * Render an email - Can be used to display the result
      *
-     * @param string $templateId   Template ID
-     * @param array  $templateData Template data
-     * @param array  $images       Images
-     * @param array  $attachments  Attachments
+     * @param string   $templateId   Template ID
+     * @param array    $templateData Template data
+     * @param string[] $images       Images
+     * @param string[] $attachments  Attachments
      *
      * @return int
      * @throws \Exception
@@ -59,7 +59,7 @@ class Mailer
     public function render($templateId, $templateData = [], $images = [], $attachments = [])
     {
         // Validate template
-        if (false === isset($this->emails[$templateId])) {
+        if (!isset($this->emails[$templateId])) {
             throw new \Exception('This email is not configured in eb_email.emails');
         }
 
