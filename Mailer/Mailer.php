@@ -36,8 +36,6 @@ class Mailer
      * @param EngineInterface $templating Rendering Engine
      * @param array           $senders    Senders
      * @param array           $emails     Emails
-     *
-     * @throws \Exception
      */
     public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, array $senders, array $emails)
     {
