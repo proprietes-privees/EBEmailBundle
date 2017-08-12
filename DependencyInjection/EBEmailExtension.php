@@ -23,11 +23,10 @@ class EBEmailExtension extends Extension
         $conf = $this->processConfiguration(new Configuration(), $configs);
 
         // Prepare senders
-        $senders = array_combine(array_map(function (array $sender) {
-            return $sender['email'];
-        }, $conf['senders']), array_map(function (array $sender) {
-            return $sender['name'];
-        }, $conf['senders']));
+        $senders = array_combine(
+            array_column($conf['senders'], 'email'),
+            array_column($conf['senders'], 'name')
+        );
 
         $container->setParameter('eb_email.mailer.mailer.senders', $senders);
 
