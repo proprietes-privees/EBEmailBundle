@@ -1,5 +1,5 @@
 {
-  "name": "emmanuelballery/eb-emailbundle",
+  "name": "proprietes-privees/eb-emailbundle",
   "description": "Dead simple mailer",
   "type": "symfony-bundle",
   "require": {
